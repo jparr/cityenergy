@@ -1,3 +1,4 @@
 [submodule "dist"]
 	path = dist
-	url = git@github.com:jparr/cityenergy
+	url = git@github.com:jparr/cityenergy.git
+	branch = gh-pages
