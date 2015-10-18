@@ -26,7 +26,7 @@
     <div><header class="header-container"></header></div>
 
     <script>
-      $.get("app/templates/layout/HeaderTemplate.html", function(templateBody){
+      $.get("app/templates/layout/header.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({title: "City of Los Angeles", url_name: "los_angeles"});
         $(".header-container").html(evaluatedTemplate);
       });
@@ -36,7 +36,7 @@
 
     <div class="address-search-container"></div>
     <script>
-      $.get("app/templates/map/AddressSearchTemplate.html", function(templateBody){
+      $.get("app/templates/map/address_search.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({});
         $(".address-search-container").html(evaluatedTemplate);
       });
@@ -44,16 +44,16 @@
 
     <hr/>
 
-    <div class="category-control-container" style="padding-bottom: 130px;"></div>
+    <div class="category-control-container" style="height: 25em;"></div>
     <script>
-      $.get("app/templates/map_controls/MapCategoryControlTemplate.html", function(templateBody){
+      $.get("app/templates/map_controls/category.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({
           id: "abc",
           title: "tacos",
           checked: true,
           categories: [
-            {name: "Downtown", count: 1},
-            {name: "Jackie Brown is a 1997 comedy crime thriller film written, produced and directed by Quentin Tarantino. It is an adaptation of Elmore Leonard's 1992 novel Rum Punch, the first adaptation from Tarantino, and starring Pam Grier in the title role. The film pays homage to 1970s blaxploitation films, particularly the films Coffy (1973) and Foxy Brown (1974), both of which also starred Grier in the title roles.", count: 2}
+            {name: "Downtown", count: 1, checked: "checked='checked'"},
+            {name: "Jackie Brown is a 1997 comedy crime thriller film written, produced and directed by Quentin Tarantino. It is an adaptation of Elmore Leonard's 1992 novel Rum Punch, the first adaptation from Tarantino, and starring Pam Grier in the title role. The film pays homage to 1970s blaxploitation films, particularly the films Coffy (1973) and Foxy Brown (1974), both of which also starred Grier in the title roles.", count: 2, checked: "checked='checked'"}
           ]
         });
         $(".category-control-container").html(evaluatedTemplate);
@@ -64,7 +64,7 @@
 
     <div class="year-control-container" style="padding: 10px; background-color: #e66346;"></div>
     <script>
-      $.get("app/templates/map/YearControlTemplate.html", function(templateBody){
+      $.get("app/templates/map/year_control.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({
           current_year: "2015",
           years: ["2013", "2014", "2015"]
@@ -80,33 +80,57 @@
       <table class="building-report table-body-container"></table>
     </div>
     <script>
-      $.get("app/templates/building_comparison/TableHeadTemplate.html", function(templateBody){
+      $.get("app/templates/building_comparison/table_head.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({
           metrics: [
-            {get: function(a) { return 'a very long string goes here'; }},
-            {get: function(a) { return 'tacos'; }},
-            {get: function(a) { return 'whatever'; }},
-            {get: function(a) { return 'the end'; }}
-          ],
-          sortedBy: {field_name: 'tacos', order: 'asc'},
-          currentLayer: 'a very long string goes here'
+            {
+              current: 'current',
+              sorted: 'sorted desc',
+              field_name: 'tacos',
+              checked: "checked='checked'",
+              title: "tacos"
+            },
+            {
+              field_name: 'margaritas',
+              checked: "",
+              title: "margaritas"
+            }
+          ]
         });
         $(".table-head-container").html(evaluatedTemplate);
       });
 
-      $.get("app/templates/building_comparison/TableBodyRowsTemplate.html", function(templateBody){
+      $.get("app/templates/building_comparison/table_body.html", function(templateBody){
         var evaluatedTemplate = _.template(templateBody)({
           buildings: [
             {
-              fields: ['cookies', 'engineer'],
-              metrics: {
-                tacos: 'something',
-                cheese: 'okay',
-                dingus: 'huh',
-                ending: 'lame'
-              }
+              id: 1,
+              fields: ['Building Name', 'engineer'],
+              metrics: [
+                {
+                  'undefined': 'defined',
+                  color: "#ddb74e",
+                  value: 177,
+                },
+                {
+                  'undefined': 'undefined',
+                }
+              ]
             }
-          ]
+          ],
+          metrics: [
+            {
+              color: "#ddb74e",
+              median: 177,
+              unit: "kbtu/ft&sup2;"
+            },
+            {
+              color: "#ddb74e",
+              median: 1,
+              unit: "kbtu/ft&sup2;"
+            }
+          ],
+          currentBuilding: 1
         });
         $(".table-body-container").html(evaluatedTemplate);
       });

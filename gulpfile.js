@@ -1,11 +1,6 @@
-/*!
- * gulp
- * $ npm install gulp-sass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
- */
 
 // Load plugins
 var gulp = require('gulp'),
-    mainBowerFiles = require('main-bower-files');
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
@@ -63,11 +58,6 @@ gulp.task('images', function() {
   return gulp.src('src/images/**/*')
     .pipe(gulp.dest('dist/images'))
     .pipe(notify({ message: 'Images task complete' }));
-});
-
-gulp.task('copy-bower', function() {
-  return gulp.src(mainBowerFiles())
-    .pipe(gulp.dest('dist/app/lib'));
 });
 
 // Clean
